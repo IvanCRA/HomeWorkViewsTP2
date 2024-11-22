@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+        <item
+        android:id="@+id/civitaiFragment"
+        android:icon="@drawable/baseline_photo_24"
+        android:title="@string/menu_text_image"/>
+
+    <item
+        android:id="@+id/gifFragment"
+        android:icon="@drawable/baseline_gif_24"
+        android:title="@string/menu_text_gif"/>
+</menu>
