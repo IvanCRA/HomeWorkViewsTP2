@@ -8,12 +8,12 @@
 
     <fragment
         android:id="@+id/civitaiFragment"
-        android:name="com.example.homeworkviewstp2.CivitaiFragment"
+        android:name="com.example.homeworkviewstp2.fragment.CivitaiFragment"
         android:label="fragment_civitai"
         tools:layout="@layout/fragment_civitai" />
     <fragment
         android:id="@+id/gifFragment"
-        android:name="com.example.homeworkviewstp2.GifFragment"
+        android:name="com.example.homeworkviewstp2.fragment.GifFragment"
         android:label="fragment_gif"
         tools:layout="@layout/fragment_gif" />
 </navigation>
