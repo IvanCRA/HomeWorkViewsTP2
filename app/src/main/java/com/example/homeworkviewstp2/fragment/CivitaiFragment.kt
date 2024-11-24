@@ -27,8 +27,8 @@ class CivitaiFragment : Fragment() {
     private lateinit var viewModel: CivitaiViewModel
 
     lateinit var mService: RetrofitServiecesCivitai
-    lateinit var layoutManager: LinearLayoutManager
     lateinit var adapter: CivitaiAdapter
+    private val civitaiList = mutableListOf<Civitai>()
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?,
@@ -41,15 +41,21 @@ class CivitaiFragment : Fragment() {
 
         mService = CommonCivitai.retrofitServiecesCivitai
 
-        layoutManager = LinearLayoutManager(requireContext())
-        binding.tasksListCivitai.layoutManager = layoutManager
-
+        setupRecyclerView()
         getAllCivitaiList()
         return view
     }
 
+    private fun setupRecyclerView() {
+        binding.tasksListCivitai.layoutManager = LinearLayoutManager(requireContext())
+
+        adapter = CivitaiAdapter(requireContext(), civitaiList)
+        binding.tasksListCivitai.adapter = adapter
+    }
+
     private fun getAllCivitaiList() {
         Log.d("CivitaiFragment", "Fetching data from API...")
+
         mService.getImagesList().enqueue(object : Callback<MutableList<Civitai>> {
             override fun onFailure(call: Call<MutableList<Civitai>>, t: Throwable) {
                 Log.e("CivitaiFragment", "Error fetching data", t)
@@ -61,8 +67,10 @@ class CivitaiFragment : Fragment() {
             ) {
                 if (response.isSuccessful && response.body() != null) {
                     Log.d("CivitaiFragment", "Data received: ${response.body()}")
-                    adapter = CivitaiAdapter(requireContext(), response.body()!!)
-                    binding.tasksListCivitai.adapter = adapter
+
+                    civitaiList.clear()
+                    civitaiList.addAll(response.body()!!)
+
                     adapter.notifyDataSetChanged()
                 } else {
                     Log.e("CivitaiFragment", "Response failed or empty")
