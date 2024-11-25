@@ -14,7 +14,6 @@ object RetrofitClientCivitai {
                 .baseUrl(baseUrl)
                 .addConverterFactory(GsonConverterFactory.create())
                 .build()
-                Log.d("CivitaiFragment", "${retrofit.toString()}")
         }
         return retrofit!!
     }

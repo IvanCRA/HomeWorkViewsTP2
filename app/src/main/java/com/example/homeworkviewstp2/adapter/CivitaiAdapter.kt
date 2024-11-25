@@ -12,7 +12,7 @@ import com.example.homeworkviewstp2.R
 import com.example.homeworkviewstp2.holder.CivitaiViewHolder
 import com.example.homeworkviewstp2.model.Civitai
 
-class CivitaiAdapter(private val context: Context, private val civitaiList: MutableList<Civitai>) : RecyclerView.Adapter<CivitaiViewHolder>() {
+class CivitaiAdapter(private val context: Context, private var civitaiList: MutableList<Civitai>) : RecyclerView.Adapter<CivitaiViewHolder>() {
     private val set = ConstraintSet()
     private val requestOptions = RequestOptions().placeholder(R.drawable.baseline_photo_24)
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CivitaiViewHolder {
@@ -31,7 +31,9 @@ class CivitaiAdapter(private val context: Context, private val civitaiList: Muta
         set.clone(holder.parentContsraint)
         set.setDimensionRatio(holder.image.id, ratio)
         set.applyTo(holder.parentContsraint)
-
-
+    }
+    fun updateData(newList: List<Civitai>) {
+        civitaiList = newList.toMutableList()
+        notifyDataSetChanged()
     }
 }
