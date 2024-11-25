@@ -26,9 +26,12 @@ class CivitaiViewModel : ViewModel() {
 
     private val mService = CommonCivitai.retrofitServiecesCivitai
 
-    fun fetchCivitaiList() {
+    var currentPage = 1
+
+    fun fetchCivitaiList(page: Int) {
         viewModelScope.launch {
-            mService.getImagesList().enqueue(object : Callback<CivitaiResponse> {
+            _isLoading.value = true
+            mService.getImagesList(page).enqueue(object : Callback<CivitaiResponse> {
                 override fun onFailure(call: Call<CivitaiResponse>, t: Throwable) {
                     _isLoading.value = false
                     _error.value = t.message
@@ -37,7 +40,8 @@ class CivitaiViewModel : ViewModel() {
                 override fun onResponse(call: Call<CivitaiResponse>, response: Response<CivitaiResponse>) {
                     _isLoading.value = false
                     if (response.isSuccessful && response.body()?.items != null) {
-                        _civitaiList.value = response.body()?.items!!
+                        val newList = response.body()?.items!!
+                        _civitaiList.value = newList
                         _error.value = null
                     } else {
                         _error.value = "Failed to load data"

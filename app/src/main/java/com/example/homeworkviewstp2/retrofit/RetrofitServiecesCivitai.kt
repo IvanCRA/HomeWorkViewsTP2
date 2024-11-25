@@ -5,6 +5,6 @@ import com.example.homeworkviewstp2.model.CivitaiResponse
 import retrofit2.Call
 import retrofit2.http.*
 interface RetrofitServiecesCivitai {
-    @GET("images?limit=200&period=Day")
-    fun getImagesList(): Call<CivitaiResponse>
+    @GET("images?period=Day")
+    fun getImagesList(@Query("limit") page: Int): Call<CivitaiResponse>
 }
