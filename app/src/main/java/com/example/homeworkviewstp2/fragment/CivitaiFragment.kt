@@ -1,7 +1,5 @@
 package com.example.homeworkviewstp2.fragment
 
-import android.content.Context
-import android.app.AlertDialog
 import android.os.Bundle
 import android.util.Log
 import androidx.fragment.app.Fragment
@@ -9,10 +7,12 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.lifecycle.ViewModelProvider
-import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.GridLayoutManager
+import androidx.recyclerview.widget.StaggeredGridLayoutManager
 import com.example.homeworkviewstp2.adapter.CivitaiAdapter
 import com.example.homeworkviewstp2.databinding.FragmentCivitaiBinding
 import com.example.homeworkviewstp2.model.Civitai
+import com.example.homeworkviewstp2.model.CivitaiResponse
 import com.example.homeworkviewstp2.retrofit.RetrofitServiecesCivitai
 import com.example.homeworkviewstp2.retrofit.common.CommonCivitai
 import com.example.homeworkviewstp2.viewmodel.CivitaiViewModel
@@ -47,37 +47,32 @@ class CivitaiFragment : Fragment() {
     }
 
     private fun setupRecyclerView() {
-        binding.tasksListCivitai.layoutManager = LinearLayoutManager(requireContext())
-
+        binding.tasksListCivitai.layoutManager = StaggeredGridLayoutManager(3, StaggeredGridLayoutManager.VERTICAL)
         adapter = CivitaiAdapter(requireContext(), civitaiList)
         binding.tasksListCivitai.adapter = adapter
     }
 
     private fun getAllCivitaiList() {
-        Log.d("CivitaiFragment", "Fetching data from API...")
+        mService.getImagesList().enqueue(object : Callback<CivitaiResponse> {
+            override fun onFailure(call: Call<CivitaiResponse>, t: Throwable) {
 
-        mService.getImagesList().enqueue(object : Callback<MutableList<Civitai>> {
-            override fun onFailure(call: Call<MutableList<Civitai>>, t: Throwable) {
-                Log.e("CivitaiFragment", "Error fetching data", t)
             }
 
             override fun onResponse(
-                call: Call<MutableList<Civitai>>,
-                response: Response<MutableList<Civitai>>
+                call: Call<CivitaiResponse>,
+                response: Response<CivitaiResponse>
             ) {
-                if (response.isSuccessful && response.body() != null) {
-                    Log.d("CivitaiFragment", "Data received: ${response.body()}")
-
+                if (response.isSuccessful && response.body()?.items != null) {
                     civitaiList.clear()
-                    civitaiList.addAll(response.body()!!)
-
+                    civitaiList.addAll(response.body()?.items!!)
                     adapter.notifyDataSetChanged()
                 } else {
-                    Log.e("CivitaiFragment", "Response failed or empty")
+
                 }
             }
         })
     }
+
 
     override fun onDestroyView() {
         super.onDestroyView()

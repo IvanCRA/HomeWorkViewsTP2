@@ -1,5 +1,6 @@
 package com.example.homeworkviewstp2.retrofit
 
+import android.util.Log
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 import retrofit2.http.Url
@@ -13,6 +14,7 @@ object RetrofitClientCivitai {
                 .baseUrl(baseUrl)
                 .addConverterFactory(GsonConverterFactory.create())
                 .build()
+                Log.d("CivitaiFragment", "${retrofit.toString()}")
         }
         return retrofit!!
     }

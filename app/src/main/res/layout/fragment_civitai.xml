@@ -10,8 +10,8 @@
         android:id="@+id/tasks_list_civitai"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
-        app:spanCount="2"
+        app:layoutManager="androidx.recyclerview.widget.StaggeredGridLayoutManager"
+
         tools:listitem="@layout/item_view">
     </androidx.recyclerview.widget.RecyclerView>
 </FrameLayout>
