@@ -26,7 +26,7 @@ class CivitaiViewModel : ViewModel() {
 
     private val mService = CommonCivitai.retrofitServiecesCivitai
 
-    var currentPage = 1
+    var currentPage = 15
 
     fun fetchCivitaiList(page: Int) {
         viewModelScope.launch {
