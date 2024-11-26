@@ -4,6 +4,7 @@
 
 - [Задание](#задание)
 - [Технологии](#технологии)
+- [API](#API)
 - [Установка](#установка)
 
 
@@ -37,6 +38,8 @@
 
 - Kotlin
 - View
+- ImageView
+- ConstraintLayout
 - AndroidX
 - ViewModel
 - FloatState
@@ -44,6 +47,94 @@
 - DiffUtils
 - Glide
 - Retrofit2
+
+## API
+Используется API от [civitai.com](https://civitai.com/), документацию REST API от Civitai можно посмотреть [здесь](https://github.com/civitai/civitai/wiki/REST-API-Reference#get-apiv1images).
+Пример JSON ``https://civitai.com/api/v1/images?limit=1``
+```JSON
+{
+  "items": [
+    {
+      "id": 9173928,
+      "url": "https://image.civitai.com/xG1nkqKTMzGDvpLrqFT7WA/cc242d6c-f960-4274-aa1d-f22a71e705ef/width=832/cc242d6c-f960-4274-aa1d-f22a71e705ef.jpeg",
+      "hash": "UA8N5},:Ioni~C#laKxaoznNwvx]XmRkVstR",
+      "width": 832,
+      "height": 1216,
+      "nsfwLevel": "None",
+      "nsfw": false,
+      "browsingLevel": 1,
+      "createdAt": "2024-04-04T21:24:07.499Z",
+      "postId": 1981754,
+      "stats": {
+        "cryCount": 528,
+        "laughCount": 1051,
+        "likeCount": 8122,
+        "dislikeCount": 0,
+        "heartCount": 3313,
+        "commentCount": 29
+      },
+      "meta": {
+        "Size": "832x1216",
+        "seed": 1938345220,
+        "steps": 45,
+        "prompt": "AtomicHeartTwinsCosplay in absolute darkness, profoundly no light, holding black-pink heart shaped orbstaff, \npointed hat, translucent skin, Describe the captivating scene captured in the vintage photograph featuring a Bedouin artist skillfully swallowing a massive sword in the style of Final Fantasy, amidst a mesmerized audience. Provide details about the artist's attire, the sword's intricate design, and the expressions of the onlookers as they witness this extraordinary performance., amazing quality, masterpiece, best quality, hyper detailed, ultra detailed, UHD, perfect anatomy, portrait, dof, hyper-realism, majestic, awesome, inspiring, closeup, an weathered outworn old Fantasy cape, smooth, Closeup, by Dring, rust paint peelz, atmospheric haze, cinamatic composition, soft shadows, national geographic style",
+        "sampler": "DPM++ 2M",
+        "cfgScale": 5,
+        "clipSkip": 2,
+        "resources": [],
+        "negativePrompt": "easynegative, bad proportions, low resolution, bad, ugly, terrible, painting, 3d, render, comic, anime, manga, unrealistic, flat, watermark, signature, worst quality, low quality, normal quality, lowres, simple background, inaccurate limb, extra fingers, fewer fingers, missing fingers, extra arms, (extra legs:1.3), inaccurate eyes, bad composition, bad anatomy, error, extra digit, fewer digits, cropped, low res, worst quality, low quality, normal quality, jpeg artifacts, extra digit, fewer digits, trademark, watermark, artist's name, username, signature, text, words, human,",
+        "civitaiResources": [
+          {
+            "type": "checkpoint",
+            "modelVersionId": 345685
+          },
+          {
+            "type": "embed",
+            "weight": 1,
+            "modelVersionId": 9208
+          },
+          {
+            "type": "lora",
+            "weight": 0.65,
+            "modelVersionId": 249861
+          },
+          {
+            "type": "lora",
+            "weight": 0.6,
+            "modelVersionId": 258687
+          },
+          {
+            "type": "lora",
+            "weight": 0.8,
+            "modelVersionId": 332071
+          },
+          {
+            "type": "lora",
+            "weight": 0.9,
+            "modelVersionId": 413566
+          },
+          {
+            "type": "lora",
+            "weight": 0.6,
+            "modelVersionId": 421757
+          },
+          {
+            "type": "lora",
+            "weight": 0.8,
+            "modelVersionId": 426333
+          }
+        ]
+      },
+      "username": "Ajuro",
+      "baseModel": "SDXL 1.0"
+    }
+  ],
+  "metadata": {
+    "nextCursor": "1|1712265847499",
+    "nextPage": "https://civitai.com/api/v1/images?limit=1&cursor=1%7C1712265847499"
+  }
+}
+```
 
 ## Установка
 
