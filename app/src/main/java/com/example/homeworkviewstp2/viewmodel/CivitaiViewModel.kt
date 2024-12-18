@@ -1,6 +1,5 @@
 package com.example.homeworkviewstp2.viewmodel
 
-import androidx.lifecycle.LiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.homeworkviewstp2.model.Civitai

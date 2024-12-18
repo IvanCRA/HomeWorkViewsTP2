@@ -15,7 +15,7 @@ import com.example.homeworkviewstp2.holder.CivitaiViewHolder
 import com.example.homeworkviewstp2.model.Civitai
 import java.util.Collections.addAll
 
-class CivitaiAdapter(private val context: Context, private var civitaiList: MutableList<Civitai>) : RecyclerView.Adapter<CivitaiViewHolder>() {
+class CivitaiAdapter(private val context: Context, private var civitaiList: MutableList<Civitai>, val listener: Listener) : RecyclerView.Adapter<CivitaiViewHolder>() {
     private val set = ConstraintSet()
     private val requestOptions = RequestOptions().placeholder(R.drawable.baseline_photo_24)
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CivitaiViewHolder {
@@ -34,6 +34,7 @@ class CivitaiAdapter(private val context: Context, private var civitaiList: Muta
         set.clone(holder.parentContsraint)
         set.setDimensionRatio(holder.image.id, ratio)
         set.applyTo(holder.parentContsraint)
+        holder.bind(civitaiList[position], listener)
     }
     fun updateData(newList: List<Civitai>) {
         val diffCallback = CivitaiDiffCallback(civitaiList, newList)
@@ -42,5 +43,9 @@ class CivitaiAdapter(private val context: Context, private var civitaiList: Muta
         civitaiList.clear()
         civitaiList.addAll(newList)
         diffResult.dispatchUpdatesTo(this)
+    }
+
+    interface Listener {
+        fun onClick(civitai: Civitai)
     }
 }

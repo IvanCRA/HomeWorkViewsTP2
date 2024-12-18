@@ -6,17 +6,21 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.navigation.findNavController
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.RecyclerView
 import androidx.recyclerview.widget.StaggeredGridLayoutManager
+import com.example.homeworkviewstp2.R
 import com.example.homeworkviewstp2.adapter.CivitaiAdapter
 import com.example.homeworkviewstp2.databinding.FragmentCivitaiBinding
+import com.example.homeworkviewstp2.model.Civitai
 import com.example.homeworkviewstp2.viewmodel.CivitaiViewModel
 import kotlinx.coroutines.launch
 
 
-class CivitaiFragment : Fragment() {
+class CivitaiFragment : Fragment(), CivitaiAdapter.Listener {
 
     private var _binding: FragmentCivitaiBinding? = null
     private val binding get() = _binding!!
@@ -41,11 +45,12 @@ class CivitaiFragment : Fragment() {
 
         return view
     }
-
+ // 1. сделать кеширование картинок
+ // 2. переход на новый фрагмент
     private fun setupRecyclerView() {
         val layoutManager = StaggeredGridLayoutManager(3, StaggeredGridLayoutManager.VERTICAL)
         binding.tasksListCivitai.layoutManager = layoutManager
-        adapter = CivitaiAdapter(requireContext(), mutableListOf())
+        adapter = CivitaiAdapter(requireContext(), mutableListOf(), this)
         binding.tasksListCivitai.adapter = adapter
 
         binding.tasksListCivitai.addOnScrollListener(object : RecyclerView.OnScrollListener() {
@@ -92,6 +97,14 @@ class CivitaiFragment : Fragment() {
         }
     }
 
+     override fun onClick(civitai: Civitai) {
+         val bundle = Bundle().apply {
+             putString("civitaiImg", civitai.url)
+         }
+         val action = CivitaiFragmentDirections.actionCivitaiFragmentToImageFragment(civitai.url.toString())
+         findNavController().navigate(action)
+
+    }
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null

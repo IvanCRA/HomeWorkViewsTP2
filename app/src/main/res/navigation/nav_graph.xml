@@ -2,6 +2,7 @@
 <navigation
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/nav_graph"
     app:startDestination="@id/civitaiFragment">
@@ -10,7 +11,24 @@
         android:id="@+id/civitaiFragment"
         android:name="com.example.homeworkviewstp2.fragment.CivitaiFragment"
         android:label="fragment_civitai"
-        tools:layout="@layout/fragment_civitai" />
+        tools:layout="@layout/fragment_civitai" >
+        <action
+            android:id="@+id/action_civitaiFragment_to_imageFragment"
+            app:destination="@id/imageFragment"
+            app:popUpTo="@id/civitaiFragment"
+            />
+
+    </fragment>
+    <fragment
+        android:id="@+id/imageFragment"
+        android:name="com.example.homeworkviewstp2.fragment.ImageFragment"
+        android:label="fragment_image"
+        tools:layout="@layout/fragment_image" >
+        <argument
+            android:name="message"
+            app:argType="string" />
+    </fragment>
+
     <fragment
         android:id="@+id/gifFragment"
         android:name="com.example.homeworkviewstp2.fragment.GifFragment"
